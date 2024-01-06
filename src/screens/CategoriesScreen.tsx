@@ -1,14 +1,16 @@
-import { View, Text, Button, TextInput, KeyboardAvoidingView, TouchableOpacity, Modal } from 'react-native'
+import { View, Text, Button, TextInput, KeyboardAvoidingView, TouchableOpacity, Modal, Animated } from 'react-native'
 import React, { useState } from 'react'
 import ListItem from '../components/ListItem'
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { ColorPicker, fromHsv } from 'react-native-color-picker'
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { EvilIcons } from '@expo/vector-icons';
 
 import { COLORS, theme } from '../../constants';
 import { Category } from '../types/category';
 import CategoryRow from '../components/CategoryRow';
-
+import { GestureHandlerRootView, RectButton } from 'react-native-gesture-handler';
 
 const CategoriesScreen = ({ color, name }: Omit<Category, 'id'>) => {
     const [showColorPicker, setShowColorPicker] = useState(false);
@@ -54,7 +56,35 @@ const CategoriesScreen = ({ color, name }: Omit<Category, 'id'>) => {
                     overflow: 'hidden'
                 }}>
                     {categories.map(({ id, name, color }) => (
-                        <CategoryRow key={id} name={name} color={color} id={''} />
+                        <GestureHandlerRootView key={id} >
+                            <Swipeable
+                                renderRightActions={() => {
+                                    return (
+                                        <View
+                                            style={{
+                                                backgroundColor: COLORS.red,
+                                                width: 70
+                                            }}
+                                        >
+                                            <RectButton
+                                                style={{
+                                                    flex: 1,
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                }}
+                                                onPress={() => 
+                                                    setCategories(
+                                                        categories.filter((category) => category.id !== id)
+                                                    )
+                                                }>
+                                                <EvilIcons name="trash" size={24} color={COLORS.white} />
+                                            </RectButton>
+                                        </View>
+                                    );
+                                }}>
+                                <CategoryRow name={name} color={color} id={''} />
+                            </Swipeable>
+                        </GestureHandlerRootView>
                     ))}
                 </View>
                 <View style={{ flex: 1 }} />
@@ -92,19 +122,19 @@ const CategoriesScreen = ({ color, name }: Omit<Category, 'id'>) => {
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
-            <Modal 
-                transparent={true} 
-                visible={showColorPicker} 
+            <Modal
+                transparent={true}
+                visible={showColorPicker}
                 animationType='fade'
                 onRequestClose={() => setShowColorPicker(false)}
             >
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24}}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24 }}>
                     <View style={{
                         // flex: 1,
                         padding: 24,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        width: '100%', 
+                        width: '100%',
                         backgroundColor: theme.colors.card,
                         borderRadius: 12,
                         marginTop: 22
