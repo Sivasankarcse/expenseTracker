@@ -31,4 +31,6 @@ export const COLORS = {
     peach: '#FF615F',
     purple: '#8e44ad',
     red: '#FF0000',
+
+    lightGrayCustom: 'rgba(169, 169, 169, 0.3)',
 }

@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLORS, theme } from '../../constants';
-import { TabBarIcon } from '../components/TabBarIcon';
+import { CustomIcon } from '../components/CustomIcon';
 import TrackListScreen from './TrackListScreen';
 import StatsScreen from './StatsScreen';
 import AccountsScreen from './AccountsScreen';
@@ -24,7 +24,7 @@ const HomeScreen = () => {
                     title: "Date",
                     tabBarActiveTintColor: COLORS?.blue,
                     tabBarInactiveBackgroundColor: theme.colors.card,
-                    tabBarIcon: (props) => <TabBarIcon {...props} name='notebook' type='date' />
+                    tabBarIcon: (props) => <CustomIcon {...props} name='notebook' type='date' />
                 }}
                 name='TrackListScreen'
                 component={TrackListScreen}
@@ -34,7 +34,7 @@ const HomeScreen = () => {
                     title: "Stats",
                     tabBarActiveTintColor: COLORS?.blue,
                     tabBarInactiveBackgroundColor: theme.colors.card,
-                    tabBarIcon: (props) => <TabBarIcon {...props} name='stats-chart-outline' type='stats' />
+                    tabBarIcon: (props) => <CustomIcon {...props} name='stats-chart-outline' type='stats' />
                 }}
                 name='StatsScreen'
                 component={StatsScreen} />
@@ -43,7 +43,7 @@ const HomeScreen = () => {
                     title: "Accounts",
                     tabBarActiveTintColor: COLORS?.blue,
                     tabBarInactiveBackgroundColor: theme.colors.card,
-                    tabBarIcon: (props) => <TabBarIcon {...props} name='switch-account' type='accounts' />
+                    tabBarIcon: (props) => <CustomIcon {...props} name='switch-account' type='accounts' />
                 }}
                 name='AccountsScreen'
                 component={AccountsScreen} />
@@ -52,7 +52,7 @@ const HomeScreen = () => {
                     title: "Settings",
                     tabBarActiveTintColor: COLORS?.blue,
                     tabBarInactiveBackgroundColor: theme.colors.card,
-                    tabBarIcon: (props) => <TabBarIcon {...props} name="settings" type='settings' />
+                    tabBarIcon: (props) => <CustomIcon {...props} name="settings" type='settings' />
                 }}
                 name='SettingsScreen'
                 component={SettingsScreen} />

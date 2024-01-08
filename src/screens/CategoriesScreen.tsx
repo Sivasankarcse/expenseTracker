@@ -1,4 +1,4 @@
-import { View, Text, Button, TextInput, KeyboardAvoidingView, TouchableOpacity, Modal, Animated } from 'react-native'
+import { View, Text, Button, TextInput, KeyboardAvoidingView, TouchableOpacity, Modal, Animated, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import ListItem from '../components/ListItem'
 import Entypo from '@expo/vector-icons/Entypo';
@@ -51,43 +51,44 @@ const CategoriesScreen = ({ color, name }: Omit<Category, 'id'>) => {
                 behavior='padding'
                 keyboardVerticalOffset={112}
                 style={{ margin: 16, flex: 1 }}>
-                <View style={{
-                    borderRadius: 11,
-                    overflow: 'hidden'
-                }}>
-                    {categories.map(({ id, name, color }) => (
-                        <GestureHandlerRootView key={id} >
-                            <Swipeable
-                                renderRightActions={() => {
-                                    return (
-                                        <View
-                                            style={{
-                                                backgroundColor: COLORS.red,
-                                                width: 70
-                                            }}
-                                        >
-                                            <RectButton
+                <ScrollView style={{ flex: 1 }}>
+                    <View style={{
+                        borderRadius: 11,
+                        overflow: 'hidden'
+                    }}>
+                        {categories.map(({ id, name, color }) => (
+                            <GestureHandlerRootView key={id} >
+                                <Swipeable
+                                    renderRightActions={() => {
+                                        return (
+                                            <View
                                                 style={{
-                                                    flex: 1,
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
+                                                    backgroundColor: COLORS.red,
+                                                    width: 70
                                                 }}
-                                                onPress={() => 
-                                                    setCategories(
-                                                        categories.filter((category) => category.id !== id)
-                                                    )
-                                                }>
-                                                <EvilIcons name="trash" size={24} color={COLORS.white} />
-                                            </RectButton>
-                                        </View>
-                                    );
-                                }}>
-                                <CategoryRow name={name} color={color} id={''} />
-                            </Swipeable>
-                        </GestureHandlerRootView>
-                    ))}
-                </View>
-                <View style={{ flex: 1 }} />
+                                            >
+                                                <RectButton
+                                                    style={{
+                                                        flex: 1,
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                    }}
+                                                    onPress={() =>
+                                                        setCategories(
+                                                            categories.filter((category) => category.id !== id)
+                                                        )
+                                                    }>
+                                                    <EvilIcons name="trash" size={24} color={COLORS.white} />
+                                                </RectButton>
+                                            </View>
+                                        );
+                                    }}>
+                                    <CategoryRow name={name} color={color} id={''} />
+                                </Swipeable>
+                            </GestureHandlerRootView>
+                        ))}
+                    </View>
+                </ScrollView>
                 <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', paddingHorizontal: 8, paddingVertical: 8 }}>
                     <TouchableOpacity onPress={() => setShowColorPicker(!showColorPicker)}>
                         <View style={{
@@ -149,7 +150,6 @@ const CategoriesScreen = ({ color, name }: Omit<Category, 'id'>) => {
                     </View>
                 </View>
             </Modal>
-
         </>
     )
 }

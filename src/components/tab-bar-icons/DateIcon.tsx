@@ -1,11 +1,11 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-type tabBarIconProps = {
+type customIconProps = {
     name: any,
     size: number,
     color: string
 }
 
-export const DateIcon = (props: tabBarIconProps) => (
+export const DateIcon = (props: customIconProps) => (
     <MaterialCommunityIcons name={props?.name} size={props?.size} color={props?.color} />
 )
